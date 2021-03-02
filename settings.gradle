@@ -1,0 +1,3 @@
+include ':RecyclerGenericAdapter'
+include ':app'
+rootProject.name = "RecyclerAdapterDemo"
