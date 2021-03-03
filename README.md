@@ -1,4 +1,4 @@
-[![](https://jitpack.io/v/shashank1800/Graph.svg)](https://jitpack.io/#shashank1800/Graph)
+(https://jitpack.io/#shashank1800/RecyclerGenericAdapter)
 
 # RecyclerGenericAdapter
 
