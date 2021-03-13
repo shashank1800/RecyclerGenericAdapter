@@ -21,6 +21,7 @@ dependencies {
 	implementation 'com.github.shashank1800:RecyclerGenericAdapter:1.0.3'
 }
  ```
+### This is how you can avoid writing an adapter for your recycler view every time
 To use RecyclerGenericAdapter, instantiate as shown below 
 
 ```kotlin
