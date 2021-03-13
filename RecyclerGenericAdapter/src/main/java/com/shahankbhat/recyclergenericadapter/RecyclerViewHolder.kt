@@ -18,11 +18,11 @@ public class RecyclerViewHolder<BIND_TYPE : ViewDataBinding>(var binding: BIND_T
         binding.executePendingBindings()
     }
 
-    fun <MODEL_TYPE> bindClickListener(model: MODEL_TYPE, callbacks: ArrayList<CallBackModel<MODEL_TYPE>>){
+    fun <MODEL_TYPE> bindClickListener(model: MODEL_TYPE, callbacks: ArrayList<CallBackModel<BIND_TYPE, MODEL_TYPE>>){
 
         callbacks.forEach { callback ->
             binding.root.findViewById<View>(callback.id).setOnClickListener {
-                callback.block(model, adapterPosition)
+                callback.block(model, adapterPosition, binding)
             }
         }
 

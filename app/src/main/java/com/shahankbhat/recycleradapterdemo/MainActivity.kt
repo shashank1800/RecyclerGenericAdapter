@@ -2,6 +2,7 @@ package com.shahankbhat.recycleradapterdemo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shahankbhat.recycleradapterdemo.databinding.ActivityMainBinding
@@ -20,10 +21,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val callbacks = ArrayList<CallBackModel<TestModel>>()
+        val clickListener = ArrayList<CallBackModel<TestModel>>()
+        clickListener.add(CallBackModel(R.id.show) { model: TestModel, position: Int ->
+            Toast.makeText(this@MainActivity, "Position : $position \n$model", Toast.LENGTH_SHORT).show()
+        })
         val adapter = RecyclerGenericAdapter<AdapterItem1Binding, TestModel>(
                 R.layout.adapter_item_1,
-                callbacks,
+                clickListener,
                 BR.testModel
         )
 
@@ -33,6 +37,10 @@ class MainActivity : AppCompatActivity() {
         adapter.submitList(testModelList)
 
         val callbacks2 = ArrayList<CallBackModel<Test2Model>>()
+        callbacks2.add(CallBackModel(R.id.root) { model: Test2Model, position: Int ->
+            Toast.makeText(this@MainActivity, "Position : $position \n$model", Toast.LENGTH_SHORT).show()
+        })
+
         val adapter2 = RecyclerGenericAdapter<AdapterItem2Binding, Test2Model>(
                 R.layout.adapter_item_2,
                 callbacks2,

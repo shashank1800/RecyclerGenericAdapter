@@ -15,12 +15,12 @@ import androidx.recyclerview.widget.RecyclerView
 
 public class RecyclerGenericAdapter<BIND_TYPE : ViewDataBinding, MODEL_TYPE>(
     private val layoutId: Int,
-    private val callbacks: ArrayList<CallBackModel<MODEL_TYPE>>,
+    private val callbacks: ArrayList<CallBackModel<BIND_TYPE, MODEL_TYPE>>,
     private val variableId: Int
 ) :
     RecyclerView.Adapter<RecyclerViewHolder<BIND_TYPE>>() {
 
-    private val list: ArrayList<MODEL_TYPE> = ArrayList()
+    private var list: ArrayList<MODEL_TYPE> = ArrayList()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -36,6 +36,15 @@ public class RecyclerGenericAdapter<BIND_TYPE : ViewDataBinding, MODEL_TYPE>(
     fun submitList(subList: ArrayList<MODEL_TYPE>) {
         list.addAll(subList)
         notifyDataSetChanged()
+    }
+
+    fun replaceList(subList: ArrayList<MODEL_TYPE>) {
+        list = subList
+        notifyDataSetChanged()
+    }
+
+    fun getItemList(): ArrayList<MODEL_TYPE>{
+        return list
     }
 
     fun clearList() {
