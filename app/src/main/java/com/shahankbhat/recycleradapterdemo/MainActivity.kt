@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
                 .show()
         })
 
-
         adapter1 = RecyclerGenericAdapter(
             R.layout.adapter_item_1,
             clickListener,
