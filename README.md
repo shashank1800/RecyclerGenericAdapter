@@ -7,27 +7,29 @@
 Add it in your root build.gradle at the end of repositories:
 
 ```gradle
-	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
 	}
+}
 ```
 ### Step 2. 
 Add the dependency
 ```gradle
-	dependencies {
-	        implementation 'com.github.shashank1800:RecyclerGenericAdapter:1.0.3'
-	}
+dependencies {
+	implementation 'com.github.shashank1800:RecyclerGenericAdapter:1.0.3'
+}
  ```
 To use RecyclerGenericAdapter, instantiate as shown below 
 
 ```kotlin
 
-val clickListener = ArrayList<CallBackModel<TestModel>>()
-clickListener.add(CallBackModel(R.id.button_show) { model: TestModel, position: Int ->
-    Toast.makeText(context, "Position : $position \n$model", Toast.LENGTH_SHORT).show()
+val clickListener = ArrayList<CallBackModel<AdapterItem1Binding, TestModel>>()
+
+clickListener.add(CallBackModel(R.id.show) { model, position, binding ->
+    Toast.makeText(this@MainActivity, "Show button clicked", Toast.LENGTH_SHORT)
+	.show()
 })
 val adapter = RecyclerGenericAdapter<AdapterItemBinding, TestModel>(
         R.layout.adapter_item, // layout for adapter
