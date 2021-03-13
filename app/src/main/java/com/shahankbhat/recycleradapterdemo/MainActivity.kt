@@ -21,33 +21,35 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val clickListener = ArrayList<CallBackModel<TestModel>>()
-        clickListener.add(CallBackModel(R.id.show) { model: TestModel, position: Int ->
-            Toast.makeText(this@MainActivity, "Position : $position \n$model", Toast.LENGTH_SHORT).show()
+        val clickListener = ArrayList<CallBackModel<AdapterItem1Binding, TestModel>>()
+        clickListener.add(CallBackModel(R.id.show) { model, position, binding ->
+            Toast.makeText(this@MainActivity, "Position : $position \n$model", Toast.LENGTH_SHORT)
+                .show()
         })
-        val adapter = RecyclerGenericAdapter<AdapterItem1Binding, TestModel>(
-                R.layout.adapter_item_1,
-                clickListener,
-                BR.testModel
+        val adapter = RecyclerGenericAdapter(
+            R.layout.adapter_item_1,
+            clickListener,
+            BR.testModel
         )
 
-        val testModelList =  ArrayList<TestModel>()
+        val testModelList = ArrayList<TestModel>()
         testModelList.add(TestModel(1, "Head 1", "Sub heading 1"))
         testModelList.add(TestModel(2, "Head 2", "Sub heading 2"))
         adapter.submitList(testModelList)
 
-        val callbacks2 = ArrayList<CallBackModel<Test2Model>>()
-        callbacks2.add(CallBackModel(R.id.root) { model: Test2Model, position: Int ->
-            Toast.makeText(this@MainActivity, "Position : $position \n$model", Toast.LENGTH_SHORT).show()
+        val callbacks2 = ArrayList<CallBackModel<AdapterItem2Binding, Test2Model>>()
+        callbacks2.add(CallBackModel(R.id.root) { model: Test2Model, position: Int, binding: AdapterItem2Binding ->
+            Toast.makeText(this@MainActivity, "Position : $position \n$model", Toast.LENGTH_SHORT)
+                .show()
         })
 
-        val adapter2 = RecyclerGenericAdapter<AdapterItem2Binding, Test2Model>(
-                R.layout.adapter_item_2,
-                callbacks2,
-                BR.test2Model
+        val adapter2 = RecyclerGenericAdapter(
+            R.layout.adapter_item_2,
+            callbacks2,
+            BR.test2Model
         )
 
-        val test2ModelList =  ArrayList<Test2Model>()
+        val test2ModelList = ArrayList<Test2Model>()
         test2ModelList.add(Test2Model(1, "Head 1"))
         test2ModelList.add(Test2Model(2, "Head 2"))
         adapter2.submitList(test2ModelList)
