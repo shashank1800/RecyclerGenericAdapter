@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.shahankbhat.recycleradapterdemo.databinding.ActivityMainBinding
 import com.shahankbhat.recycleradapterdemo.databinding.AdapterItem1Binding
 import com.shahankbhat.recycleradapterdemo.databinding.AdapterItem2Binding
-import com.shahankbhat.recycleradapterdemo.model.CallBackModel
-import com.shahankbhat.recycleradapterdemo.model.RecyclerGenericAdapter
 import com.shahankbhat.recycleradapterdemo.model.Test2Model
 import com.shahankbhat.recycleradapterdemo.model.TestModel
 import com.shahankbhat.recycleradapterdemo.viewmodel.MainActivityViewModel
+import com.shahankbhat.recyclergenericadapter.CallBackModel
+import com.shahankbhat.recyclergenericadapter.RecyclerGenericAdapter
 
 class MainActivity : AppCompatActivity() {
 

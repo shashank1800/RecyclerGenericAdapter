@@ -18,7 +18,7 @@ allprojects {
 Add the dependency
 ```gradle
 dependencies {
-	implementation 'com.github.shashank1800:RecyclerGenericAdapter:1.0.3'
+	implementation 'com.github.shashank1800:RecyclerGenericAdapter:1.0.8'
 }
  ```
 ### This is how you can avoid writing an adapter for your recycler view.
@@ -33,9 +33,9 @@ clickListener.add(CallBackModel(R.id.show) { model, position, binding ->
 	.show()
 })
 val adapter = RecyclerGenericAdapter<AdapterItemBinding, TestModel>(
-        R.layout.adapter_item, // layout for adapter
-        clickListener,
-        BR.testModel           // model variale name which is in xml
+        R.layout.adapter_item,  // layout for adapter
+        BR.testModel,           // model variale name which is in xml
+        clickListener
 )
 
 val testModelList =  ArrayList<TestModel>()
