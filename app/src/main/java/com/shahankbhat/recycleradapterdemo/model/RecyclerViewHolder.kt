@@ -1,4 +1,4 @@
-package com.shahankbhat.recyclergenericadapter
+package com.shahankbhat.recycleradapterdemo.model
 
 import android.view.View
 import androidx.databinding.ViewDataBinding
