@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.shahankbhat.recycleradapterdemo.databinding.ActivityMainBinding
 import com.shahankbhat.recycleradapterdemo.databinding.AdapterItem1Binding
 import com.shahankbhat.recycleradapterdemo.databinding.AdapterItem2Binding
+import com.shahankbhat.recycleradapterdemo.model.CallBackModel
+import com.shahankbhat.recycleradapterdemo.model.RecyclerGenericAdapter
 import com.shahankbhat.recycleradapterdemo.model.Test2Model
 import com.shahankbhat.recycleradapterdemo.model.TestModel
 import com.shahankbhat.recycleradapterdemo.viewmodel.MainActivityViewModel
-import com.shahankbhat.recyclergenericadapter.CallBackModel
-import com.shahankbhat.recyclergenericadapter.RecyclerGenericAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var viewModel: MainActivityViewModel
 
     lateinit var adapter1: RecyclerGenericAdapter<AdapterItem1Binding, TestModel>
-    lateinit var adapter2:RecyclerGenericAdapter<AdapterItem2Binding, Test2Model>
+    lateinit var adapter2: RecyclerGenericAdapter<AdapterItem2Binding, Test2Model>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,8 +43,8 @@ class MainActivity : AppCompatActivity() {
 
         adapter1 = RecyclerGenericAdapter(
             R.layout.adapter_item_1,
-            clickListener,
-            BR.testModel
+            BR.testModel,
+            clickListener
         )
         binding.recyclerView1.adapter = adapter1
         binding.recyclerView1.layoutManager = LinearLayoutManager(this)
@@ -62,8 +62,8 @@ class MainActivity : AppCompatActivity() {
 
         adapter2 = RecyclerGenericAdapter(
             R.layout.adapter_item_2,
-            callbacks2,
-            BR.test2Model
+            BR.test2Model,
+            callbacks2
         )
 
         binding.recyclerView2.adapter = adapter2
