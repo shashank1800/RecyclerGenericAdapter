@@ -64,6 +64,11 @@ class RecyclerGenericAdapter<BIND_TYPE : ViewDataBinding, MODEL_TYPE>(
         notifyDataSetChanged()
     }
 
+    fun addItem(model: MODEL_TYPE) {
+        list.add(model)
+        notifyDataSetChanged()
+    }
+
 
     override fun onBindViewHolder(holder: RecyclerViewHolder<BIND_TYPE>, position: Int) {
         val item = list[position]
