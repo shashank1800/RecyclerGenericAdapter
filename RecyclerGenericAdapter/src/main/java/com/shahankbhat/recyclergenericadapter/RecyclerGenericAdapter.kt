@@ -56,17 +56,17 @@ class RecyclerGenericAdapter<BIND_TYPE : ViewDataBinding, MODEL_TYPE>(
 
     fun removeItemAt(position: Int) {
         list.removeAt(position)
-        notifyDataSetChanged()
+        notifyItemRemoved(position)
     }
 
     fun addItemAt(position: Int, model: MODEL_TYPE) {
         list.add(position, model)
-        notifyDataSetChanged()
+        notifyItemInserted(position)
     }
 
     fun addItem(model: MODEL_TYPE) {
         list.add(model)
-        notifyDataSetChanged()
+        notifyItemInserted(list.size - 1)
     }
 
 
