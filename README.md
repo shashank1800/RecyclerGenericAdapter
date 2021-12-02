@@ -18,7 +18,7 @@ allprojects {
 Add the dependency
 ```gradle
 dependencies {
-	implementation 'com.github.shashank1800:RecyclerGenericAdapter:1.0.8'
+	implementation 'com.github.shashank1800:RecyclerGenericAdapter:1.1.0'
 }
  ```
 ### This is how you can avoid writing an adapter for your recycler view.
@@ -26,24 +26,25 @@ To use RecyclerGenericAdapter, instantiate as shown below
 
 ```kotlin
 
-val clickListener = ArrayList<CallBackModel<AdapterItem1Binding, TestModel>>()
+lateinit var adapter: RecyclerGenericAdapter<AdapterItemBinding, TestModel>
+...
 
+val clickListener = ArrayList<CallBackModel<AdapterItemBinding, TestModel>>()
 clickListener.add(CallBackModel(R.id.show) { model, position, binding ->
-    Toast.makeText(this@MainActivity, "Show button clicked", Toast.LENGTH_SHORT)
-	.show()
+    Toast.makeText(context, "Show button clicked at $position", Toast.LENGTH_SHORT)
+        .show()
 })
-val adapter = RecyclerGenericAdapter<AdapterItemBinding, TestModel>(
-        R.layout.adapter_item,  // layout for adapter
-        BR.testModel,           // model variale name which is in xml
-        clickListener
+
+adapter = RecyclerGenericAdapter(
+    R.layout.adapter_item, // layout for adapter
+    BR.testModel,          // model variable name which is in xml
+    clickListener          // adding click listeners is optional
 )
 
-val testModelList =  ArrayList<TestModel>()
-testModelList.add(TestModel(1, "Head 1", "Sub heading 1"))
-testModelList.add(TestModel(2, "Head 2", "Sub heading 2"))
-adapter.submitList(testModelList)
+binding.recyclerView.adapter = adapter
+binding.recyclerView.layoutManager = LinearLayoutManager(this)
 
-//Assign the adapter to recycler view
+adapter.submitList(viewModel.testModelList)
 
 ```
 

@@ -9,30 +9,8 @@
         android:layout_margin="10dp"
         tools:context=".MainActivity">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Recycler View 1"/>
-
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="#ccc" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Recycler View 2"
-            android:layout_marginTop="10dp"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_2"
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
