@@ -65,4 +65,5 @@ Recycler adapter item R.layout.adapter_item
     </data>
     ...
   ```
+    ⭐ mark this repo, if this was useful or want to use it later. Thanks😊.
     
