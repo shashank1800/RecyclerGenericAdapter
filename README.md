@@ -48,8 +48,7 @@ adapter.submitList(viewModel.testModelList)
 
 ```
 
-Recycler adapter item R.layout.adapter_item
-
+Recycler adapter item R.layout.adapter_item xml.
 ```xml
 
 <?xml version="1.0" encoding="utf-8"?>
@@ -65,5 +64,16 @@ Recycler adapter item R.layout.adapter_item
     </data>
     ...
   ```
-    ⭐ mark this repo, if this was useful or want to use it later. Thanks😊.
+  
+  While initializing adapter we declared model as testModel, so it binds list 
+data to xml testModel. Data variables can used to set the value of views in xml
+and also if you want to manipulate data or want to set data after performing 
+operation bit on model you can make make use of static data bindings adapter 
+methods, that's where you can perform operation on model and set data to views.
+
+If you have any questions or doubts feel free to ask it by raising issue.
+Or wants to contribute send PR to this repo. 
+I'm happy to to hear your suggestions.
+
+⭐ mark this repo, if this was useful or want to use it later. Thanks😊.
     
