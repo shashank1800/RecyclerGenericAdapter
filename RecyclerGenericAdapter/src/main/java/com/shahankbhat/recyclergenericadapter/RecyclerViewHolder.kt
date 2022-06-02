@@ -20,7 +20,7 @@ class RecyclerViewHolder<BIND_TYPE : ViewDataBinding>(var binding: BIND_TYPE) :
 
         callbacks?.forEach { callback ->
             binding.root.findViewById<View>(callback.id).setOnClickListener {
-                callback.block(model, adapterPosition, binding)
+                callback.block(model, bindingAdapterPosition, binding)
             }
         }
 
