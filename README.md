@@ -1,24 +1,11 @@
-[![](https://jitpack.io/v/shashank1800/RecyclerGenericAdapter.svg)](https://jitpack.io/#shashank1800/RecyclerGenericAdapter)
-
+![Maven Central](https://img.shields.io/maven-central/v/io.github.shashank1800/com-shahankbhat-recyclergenericadapter?style=plastic)
 
 # RecyclerGenericAdapter
 
-### Step 1. 
-Add it in your root build.gradle at the end of repositories:
-
-```gradle
-allprojects {
-	repositories {
-		...
-		maven { url 'https://jitpack.io' }
-	}
-}
-```
-### Step 2. 
 Add the dependency
 ```gradle
 dependencies {
-	implementation 'com.github.shashank1800:RecyclerGenericAdapter:1.1.0'
+	implementation 'io.github.shashank1800:com-shahankbhat-recyclergenericadapter:1.1'
 }
  ```
 ### This is how you can avoid writing an adapter for your recycler view.
