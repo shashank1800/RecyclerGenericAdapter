@@ -15,11 +15,10 @@ version = PUBLISH_VERSION
 
 ext["signing.keyId"] = ''
 ext["signing.password"] = ''
-ext["signing.secretKeyRingFile"] = ''
 ext["ossrhUsername"] = ''
 ext["ossrhPassword"] = ''
 
-File secretPropsFile = project.rootProject.file('local.properties')
+File secretPropsFile = project.rootProject.file('gradle.properties')
 if (secretPropsFile.exists()) {
     println "Found secret props file, loading props"
     Properties p = new Properties()
@@ -35,6 +34,7 @@ if (secretPropsFile.exists()) {
     ext["ossrhUsername"] = System.getenv('OSSRH_USERNAME')
     ext["ossrhPassword"] = System.getenv('OSSRH_PASSWORD')
 }
+ext["signing.secretKeyRingFile"] = "${rootDir}/" + ext["signing.secretKeyRingFile"]
 
 println PUBLISH_GROUP_ID
 println PUBLISH_ARTIFACT_ID
@@ -98,7 +98,7 @@ project.afterEvaluate {
                 name = "sonatype"
 
                 def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-                def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+//                def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
                 // You only need this if you want to publish snapshots, otherwise just set the URL
                 // to the release repo directly
                 url "${releasesRepoUrl}"
@@ -116,11 +116,6 @@ project.afterEvaluate {
     }
 }
 
-//model {
-//    tasks.generatePomFileForMavenCustomPublication {
-//        destination = file("$buildDir/publications/releaseAar/pom-default.xml")
-//    }
-//}
 
 
 signing {

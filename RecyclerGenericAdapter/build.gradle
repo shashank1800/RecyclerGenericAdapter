@@ -12,7 +12,7 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 32
-        versionName "1.1"
+        versionName "1.2"
 
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -30,14 +30,12 @@ android {
 
     buildFeatures{
         dataBinding true
-//        viewBinding true
     }
 
 }
 
 dependencies {
     implementation "androidx.recyclerview:recyclerview:1.2.1"
-//    implementation "org.jetbrains.kotlin:kotlin-stdlib:$gradle_version"
 }
 
 ext {
