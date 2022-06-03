@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.shahankbhat.recyclergenericadapter.util.CallBackModel
+import com.shahankbhat.recyclergenericadapter.util.RecyclerViewHolder
 
 /**
  * Created by SHASHANK BHAT on 27-Feb-21.
@@ -76,4 +78,17 @@ class RecyclerGenericAdapter<BIND_TYPE : ViewDataBinding, MODEL_TYPE>(
         holder.bindClickListener(item, callbacks)
     }
 
+    class Builder<BIND_TYPE : ViewDataBinding, MODEL_TYPE>(
+        private val layoutId: Int,
+        private val variableId: Int,
+    ) {
+        var callbacks: ArrayList<CallBackModel<BIND_TYPE, MODEL_TYPE>>? = null
+            private set
+
+        fun setCallbacks(callbacks: ArrayList<CallBackModel<BIND_TYPE, MODEL_TYPE>>) =
+            apply { this.callbacks = callbacks }
+
+
+        fun build() = RecyclerGenericAdapter(layoutId, variableId, callbacks)
+    }
 }

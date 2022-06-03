@@ -10,15 +10,13 @@ import com.shahankbhat.recycleradapterdemo.databinding.ActivityMainBinding
 import com.shahankbhat.recycleradapterdemo.databinding.AdapterItemBinding
 import com.shahankbhat.recycleradapterdemo.model.TestModel
 import com.shahankbhat.recycleradapterdemo.viewmodel.MainActivityViewModel
-import com.shahankbhat.recyclergenericadapter.CallBackModel
 import com.shahankbhat.recyclergenericadapter.RecyclerGenericAdapter
+import com.shahankbhat.recyclergenericadapter.util.CallBackModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     lateinit var viewModel: MainActivityViewModel
-
-    lateinit var adapter: RecyclerGenericAdapter<AdapterItemBinding, TestModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,13 +32,17 @@ class MainActivity : AppCompatActivity() {
         clickListener.add(CallBackModel(R.id.show) { model, position, binding ->
             Toast.makeText(this@MainActivity, "Show button clicked at $position", Toast.LENGTH_SHORT)
                 .show()
+
+            val heading = model.heading
+            model.heading = model.subHeading
+            model.subHeading = heading
+
+            binding.testModel = model
         })
 
-        adapter = RecyclerGenericAdapter(
-            R.layout.adapter_item,
-            BR.testModel,
-            clickListener
-        )
+        val adapter = RecyclerGenericAdapter.Builder<AdapterItemBinding, TestModel>(R.layout.adapter_item, BR.testModel)
+            .setCallbacks(clickListener)
+            .build()
 
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)

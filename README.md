@@ -8,32 +8,26 @@ dependencies {
 	implementation 'io.github.shashank1800:com-shahankbhat-recyclergenericadapter:1.1'
 }
  ```
-### This is how you can avoid writing an adapter for your recycler view.
-To use RecyclerGenericAdapter, instantiate as shown below 
+
+To use RecyclerGenericAdapter, instantiate as shown below
 
 ```kotlin
 
-lateinit var adapter: RecyclerGenericAdapter<AdapterItemBinding, TestModel>
-..
+val adapter = RecyclerGenericAdapter.Builder<AdapterItemBinding, TestModel>(
+    R.layout.adapter_item,  // layout for adapter
+    BR.testModel            // model variable name which is in xml
+).build()
 
-val clickListener = ArrayList<CallBackModel<AdapterItemBinding, TestModel>>()
-clickListener.add(CallBackModel(R.id.show) { model, position, binding ->
-    Toast.makeText(context, "Show button clicked at $position", Toast.LENGTH_SHORT)
-        .show()
-})
+recyclerView.adapter = adapter
+recyclerView.layoutManager = LinearLayoutManager(this)
 
-adapter = RecyclerGenericAdapter(
-    R.layout.adapter_item, // layout for adapter
-    BR.testModel,          // model variable name which is in xml
-    clickListener          // adding click listeners is optional
-)
-
-binding.recyclerView.adapter = adapter
-binding.recyclerView.layoutManager = LinearLayoutManager(this)
-
-adapter.submitList(viewModel.testModelList)
+adapter.submitList(testModelList)
 
 ```
+
+AdapterItemBinding is generated for ```R.layout.adapter_item```, you just have to enable databinding for that.
+and since com.exaple.app.BR class is generated while building app, you may not see your model name before first
+time running build project.
 
 Recycler adapter item R.layout.adapter_item xml.
 ```xml
@@ -49,17 +43,45 @@ Recycler adapter item R.layout.adapter_item xml.
             type="com.packagename.model.TestModel" />
 
     </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
     ...
   ```
-  
-  While initializing adapter we declared model as testModel, so it binds list 
+
+To add click listener for any view
+
+  ```kotlin
+val clickListener = ArrayList<CallBackModel<AdapterItemBinding, TestModel>>()
+clickListener.add(CallBackModel(R.id.show) { model, position, binding ->
+    // R.id.show is the id of a view
+    // model : adapter list model
+    // position : adapter item position
+    // binding : view binding of adapter item
+    
+    
+    // We can perform operation on model and binding here and this gets triggered on click of R.id.show view
+    Toast.makeText(this@MainActivity, "Show button clicked at $position", Toast.LENGTH_SHORT).show()
+
+    val heading = model.heading
+    model.heading = model.subHeading
+    model.subHeading = heading
+
+    binding.testModel = model
+})
+
+val adapter = RecyclerGenericAdapter.Builder<AdapterItemBinding, TestModel>(R.layout.adapter_item, BR.testModel)
+    .setCallbacks(clickListener)  // set click listeners here
+    .build()
+  ```
+
+While initializing adapter we declared model as testModel, so it binds list
 data to xml testModel. Data variables can used to set the value of views in xml
-and also if you want to manipulate data or want to set data after performing 
-operation bit on model you can make make use of static data bindings adapter 
+and also if you want to manipulate data or want to set data after performing
+operation bit on model you can make use of static data bindings adapter
 methods, that's where you can perform operation on model and set data to views.
 
 If you have any questions or doubts feel free to ask it by raising issue.
-Or wants to contribute send PR to this repo. 
+Or wants to contribute send PR to this repo.
 I'm happy to to hear your suggestions.
 
 ⭐ mark this repo, if this was useful or want to use it later. Thanks😊.
