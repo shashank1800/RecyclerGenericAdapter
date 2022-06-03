@@ -1,4 +1,4 @@
-![Maven Central](https://img.shields.io/maven-central/v/io.github.shashank1800/com-shahankbhat-recyclergenericadapter?style=plastic)
+![Maven Central](https://img.shields.io/maven-central/v/io.github.shashank1800/com-shahankbhat-recyclergenericadapter?logoColor=green&style=for-the-badge)
 
 # RecyclerGenericAdapter
 
@@ -14,7 +14,7 @@ To use RecyclerGenericAdapter, instantiate as shown below
 ```kotlin
 
 lateinit var adapter: RecyclerGenericAdapter<AdapterItemBinding, TestModel>
-...
+..
 
 val clickListener = ArrayList<CallBackModel<AdapterItemBinding, TestModel>>()
 clickListener.add(CallBackModel(R.id.show) { model, position, binding ->
