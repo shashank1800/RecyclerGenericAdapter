@@ -12,6 +12,9 @@ import com.shahankbhat.recycleradapterdemo.model.TestModel
 import com.shahankbhat.recycleradapterdemo.viewmodel.MainActivityViewModel
 import com.shahankbhat.recyclergenericadapter.RecyclerGenericAdapter
 import com.shahankbhat.recyclergenericadapter.util.CallBackModel
+import com.shahankbhat.recyclergenericadapter.util.Callbacks
+import com.shahankbhat.recyclergenericadapter.util.DataBinds
+import com.shahankbhat.recyclergenericadapter.util.MoreDataBindings
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,8 +31,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
 
-        val clickListener = ArrayList<CallBackModel<AdapterItemBinding, TestModel>>()
+        val clickListener = Callbacks<AdapterItemBinding, TestModel>()
         clickListener.add(CallBackModel(R.id.show) { model, position, binding ->
+            // R.id.show is the id of a view
+            // model : adapter list model
+            // position : adapter item position
+            // binding : view binding of adapter item
+
+
+            // We can perform operation on model and binding here and this gets triggered on click of R.id.show view
             Toast.makeText(this@MainActivity, "Show button clicked at $position", Toast.LENGTH_SHORT)
                 .show()
 
@@ -41,8 +51,11 @@ class MainActivity : AppCompatActivity() {
         })
 
         val adapter = RecyclerGenericAdapter.Builder<AdapterItemBinding, TestModel>(R.layout.adapter_item, BR.testModel)
-            .setCallbacks(clickListener)
-            .build()
+            .setClickCallbacks(clickListener)
+            .setMoreDataBinds(DataBinds().apply {
+                add(MoreDataBindings(BR.subHead, "Subhead"))
+                add(MoreDataBindings(BR.viewModel, viewModel))
+            }).build()
 
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)

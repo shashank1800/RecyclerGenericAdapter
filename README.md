@@ -33,14 +33,22 @@ Recycler adapter item R.layout.adapter_item xml.
 ```xml
 
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable
             name="testModel"
-            type="com.packagename.model.TestModel" />
+            type="com.shahankbhat.recycleradapterdemo.model.TestModel" />
+
+        <variable
+            name="subHead"
+            type="String" />
+
+        <variable
+            name="viewModel"
+            type="com.shahankbhat.recycleradapterdemo.viewmodel.MainActivityViewModel" />
 
     </data>
 
@@ -51,16 +59,17 @@ Recycler adapter item R.layout.adapter_item xml.
 To add click listener for any view
 
   ```kotlin
-val clickListener = ArrayList<CallBackModel<AdapterItemBinding, TestModel>>()
+val clickListener = Callbacks<AdapterItemBinding, TestModel>()
 clickListener.add(CallBackModel(R.id.show) { model, position, binding ->
     // R.id.show is the id of a view
     // model : adapter list model
     // position : adapter item position
     // binding : view binding of adapter item
-    
-    
+
+
     // We can perform operation on model and binding here and this gets triggered on click of R.id.show view
-    Toast.makeText(this@MainActivity, "Show button clicked at $position", Toast.LENGTH_SHORT).show()
+    Toast.makeText(this@MainActivity, "Show button clicked at $position", Toast.LENGTH_SHORT)
+        .show()
 
     val heading = model.heading
     model.heading = model.subHeading
@@ -70,7 +79,7 @@ clickListener.add(CallBackModel(R.id.show) { model, position, binding ->
 })
 
 val adapter = RecyclerGenericAdapter.Builder<AdapterItemBinding, TestModel>(R.layout.adapter_item, BR.testModel)
-    .setCallbacks(clickListener)  // set click listeners here
+    .setClickCallbacks(clickListener)
     .build()
   ```
 
@@ -79,6 +88,18 @@ data to xml testModel. Data variables can used to set the value of views in xml
 and also if you want to manipulate data or want to set data after performing
 operation bit on model you can make use of static data bindings adapter
 methods, that's where you can perform operation on model and set data to views.
+
+Also if you want to set more bindings into adapter item you can set like this.
+
+  ```kotlin
+
+val adapter = RecyclerGenericAdapter.Builder<AdapterItemBinding, TestModel>(R.layout.adapter_item, BR.testModel)
+    .setClickCallbacks(clickListener)
+    .setMoreDataBinds(DataBinds().apply {
+        add(MoreDataBindings(BR.subHead, "Subhead"))
+        add(MoreDataBindings(BR.viewModel, viewModel))
+    }).build()
+  ```
 
 If you have any questions or doubts feel free to ask it by raising issue.
 Or wants to contribute send PR to this repo.

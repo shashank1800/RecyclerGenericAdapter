@@ -12,11 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerViewHolder<BIND_TYPE : ViewDataBinding>(var binding: BIND_TYPE) :
     RecyclerView.ViewHolder(binding.root) {
-    fun <MODEL_TYPE> bindTo(model: MODEL_TYPE, variableId: Int) {
+    fun <MODEL_TYPE> bindTo(variableId: Int, model: MODEL_TYPE) {
         binding.setVariable(variableId, model)
     }
 
-    fun <MODEL_TYPE> bindClickListener(model: MODEL_TYPE, callbacks: ArrayList<CallBackModel<BIND_TYPE, MODEL_TYPE>>?){
+    fun <MODEL_TYPE> bindClickListener(model: MODEL_TYPE, callbacks: Callbacks<BIND_TYPE, MODEL_TYPE>?){
 
         callbacks?.forEach { callback ->
             binding.root.findViewById<View>(callback.id).setOnClickListener {

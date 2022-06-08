@@ -17,4 +17,6 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
 
     }
 
+    var subHead = "Show toast"
+
 }

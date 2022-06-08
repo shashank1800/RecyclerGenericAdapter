@@ -2,10 +2,12 @@ package com.shahankbhat.recyclergenericadapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.shahankbhat.recyclergenericadapter.util.CallBackModel
+import com.shahankbhat.recyclergenericadapter.util.Callbacks
+import com.shahankbhat.recyclergenericadapter.util.DataBinds
 import com.shahankbhat.recyclergenericadapter.util.RecyclerViewHolder
 
 /**
@@ -16,7 +18,8 @@ import com.shahankbhat.recyclergenericadapter.util.RecyclerViewHolder
 class RecyclerGenericAdapter<BIND_TYPE : ViewDataBinding, MODEL_TYPE>(
     private val layoutId: Int,
     private val variableId: Int,
-    private val callbacks: ArrayList<CallBackModel<BIND_TYPE, MODEL_TYPE>>? = null
+    private val callbacks: Callbacks<BIND_TYPE, MODEL_TYPE>? = null,
+    private val moreDataBinds: DataBinds? = null
 ) :
     RecyclerView.Adapter<RecyclerViewHolder<BIND_TYPE>>() {
 
@@ -74,21 +77,30 @@ class RecyclerGenericAdapter<BIND_TYPE : ViewDataBinding, MODEL_TYPE>(
 
     override fun onBindViewHolder(holder: RecyclerViewHolder<BIND_TYPE>, position: Int) {
         val item = list[position]
-        holder.bindTo(item, variableId)
+        holder.bindTo(variableId, item)
         holder.bindClickListener(item, callbacks)
+
+        moreDataBinds?.forEach {
+            holder.bindTo(it.modelId, it.model)
+        }
     }
 
     class Builder<BIND_TYPE : ViewDataBinding, MODEL_TYPE>(
-        private val layoutId: Int,
+        @LayoutRes private val layoutId: Int,
         private val variableId: Int,
     ) {
-        var callbacks: ArrayList<CallBackModel<BIND_TYPE, MODEL_TYPE>>? = null
+        var callbacks: Callbacks<BIND_TYPE, MODEL_TYPE>? = null
             private set
 
-        fun setCallbacks(callbacks: ArrayList<CallBackModel<BIND_TYPE, MODEL_TYPE>>) =
+        var moreDataBinds: DataBinds? = null
+            private set
+
+        fun setClickCallbacks(callbacks: Callbacks<BIND_TYPE, MODEL_TYPE>?) =
             apply { this.callbacks = callbacks }
 
+        fun setMoreDataBinds(moreDataBinds: DataBinds?) =
+            apply { this.moreDataBinds = moreDataBinds }
 
-        fun build() = RecyclerGenericAdapter(layoutId, variableId, callbacks)
+        fun build() = RecyclerGenericAdapter(layoutId, variableId, callbacks, moreDataBinds)
     }
 }
