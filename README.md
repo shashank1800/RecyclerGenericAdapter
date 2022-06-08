@@ -5,7 +5,7 @@
 Add the dependency
 ```gradle
 dependencies {
-	implementation 'io.github.shashank1800:com-shahankbhat-recyclergenericadapter:1.1'
+	implementation 'io.github.shashank1800:com-shahankbhat-recyclergenericadapter:1.4'
 }
  ```
 
