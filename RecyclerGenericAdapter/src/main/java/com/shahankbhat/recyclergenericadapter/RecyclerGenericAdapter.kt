@@ -74,6 +74,16 @@ class RecyclerGenericAdapter<BIND_TYPE : ViewDataBinding, MODEL_TYPE>(
         notifyItemInserted(list.size - 1)
     }
 
+    fun replaceItemAt(position: Int, model: MODEL_TYPE){
+        list.removeAt(position)
+        list.add(position, model)
+        notifyItemChanged(position)
+    }
+
+    fun notifyItemChangedAt(position: Int){
+        notifyItemChanged(position)
+    }
+
 
     override fun onBindViewHolder(holder: RecyclerViewHolder<BIND_TYPE>, position: Int) {
         val item = list[position]
